@@ -19,5 +19,21 @@ namespace CaelumEstoque.Controllers
 
             return View();
         }
+
+        public ActionResult Form()
+        {
+            CategoriasDAO dao = new CategoriasDAO();
+            IList<CategoriaDoProduto> categorias = dao.Lista();
+            ViewBag.Categorias = categorias;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Adiciona(Produto produto)
+        {
+            ProdutosDAO dao = new ProdutosDAO();
+            dao.Adiciona(produto);
+            return RedirectToAction("Index"); //O RedirectToAction redirecionará o usuário para o método Index do controller atual
+        }
     }
 }
